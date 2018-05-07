@@ -218,7 +218,6 @@
             this.button_withoutTPMinfo.Size = new System.Drawing.Size(207, 23);
             this.button_withoutTPMinfo.TabIndex = 24;
             this.button_withoutTPMinfo.Text = "How to use BitLocker without TPM";
-            this.toolTip1.SetToolTip(this.button_withoutTPMinfo, "\r\n");
             this.button_withoutTPMinfo.UseVisualStyleBackColor = true;
             this.button_withoutTPMinfo.Click += new System.EventHandler(this.Button_withoutTPMinfo_Click);
             // 
