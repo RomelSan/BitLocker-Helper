@@ -288,6 +288,8 @@
             // 
             // textBox_cmdResult
             // 
+            this.textBox_cmdResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_cmdResult.Location = new System.Drawing.Point(12, 295);
             this.textBox_cmdResult.Name = "textBox_cmdResult";
             this.textBox_cmdResult.Size = new System.Drawing.Size(653, 21);
@@ -295,6 +297,8 @@
             // 
             // textBox_pshellResult
             // 
+            this.textBox_pshellResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_pshellResult.Location = new System.Drawing.Point(12, 347);
             this.textBox_pshellResult.Multiline = true;
             this.textBox_pshellResult.Name = "textBox_pshellResult";
@@ -351,9 +355,10 @@
             this.Controls.Add(this.textBox_Unit);
             this.Controls.Add(this.label_unit);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(800, 500);
+            this.MinimumSize = new System.Drawing.Size(693, 480);
             this.Name = "Form1";
             this.Text = "Bitlocker Helper";
             this.Load += new System.EventHandler(this.Form1_Load);

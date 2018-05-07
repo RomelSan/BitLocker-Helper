@@ -113,11 +113,13 @@ namespace BitLocker_Helper
                  Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes128 -PasswordProtector -Password $pass 
                 */
                 textBox_pshellResult.Text = "$pass = ConvertTo-SecureString \"myPASSWORD\" -AsPlainText -Force" + "\r\n";
-                textBox_pshellResult.Text += "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+
+                textBox_pshellResult.Text +=
+                "# Note: USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
+                "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+
+                textBox_pshellResult.Text += "\r\n\r\n" + "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
                 " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -Password $pass";
-                textBox_pshellResult.Text += "\r\n\r\n" +
-                    "# Note: USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
-                    "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
             }
 
             if (checkBox_usedSpace.Checked)
