@@ -53,7 +53,7 @@ namespace BitLocker_Helper
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
             textBox_cmdResult.Text = "manage-bde –lock " + unit;
-            textBox_pshellResult.Text = "Lock-Volume -MountPoint " + unit;
+            textBox_pshellResult.Text = "Lock-BitLocker -MountPoint " + unit;
         }
 
         private void Button_encrypt_Click(object sender, EventArgs e)

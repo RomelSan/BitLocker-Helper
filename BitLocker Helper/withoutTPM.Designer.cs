@@ -40,6 +40,7 @@
             this.textBox_withoutTPM.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox_withoutTPM.Size = new System.Drawing.Size(776, 426);
             this.textBox_withoutTPM.TabIndex = 0;
+            this.textBox_withoutTPM.TabStop = false;
             this.textBox_withoutTPM.Text = resources.GetString("textBox_withoutTPM.Text");
             // 
             // withoutTPM
