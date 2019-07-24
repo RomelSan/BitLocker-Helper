@@ -18,10 +18,15 @@ namespace BitLocker_Helper
             
         }
 
+        // Form Variables for initialization
         private withoutTPM form2;
+        private ForceSoftwareOnly form3;
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Forms Initialization
             form2 = new withoutTPM();
+            form3 = new ForceSoftwareOnly();
         }
 
 
@@ -112,14 +117,12 @@ namespace BitLocker_Helper
                  $pass = ConvertTo-SecureString "myPASSWORD999HERE" -AsPlainText -Force
                  Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes128 -PasswordProtector -Password $pass 
                 */
-                textBox_pshellResult.Text = "$pass = ConvertTo-SecureString \"myPASSWORD\" -AsPlainText -Force" + "\r\n";
-
-                textBox_pshellResult.Text +=
-                "# Note: USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
-                "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
-
-                textBox_pshellResult.Text += "\r\n\r\n" + "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
+                textBox_pshellResult.Text += "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
                 " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -Password $pass";
+                textBox_pshellResult.Text += "\r\n\r\n" +
+                                                        "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
+                                                        "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
             }
 
             if (checkBox_usedSpace.Checked)
@@ -181,11 +184,11 @@ namespace BitLocker_Helper
                  $pass = ConvertTo-SecureString "myPASSWORD999HERE" -AsPlainText -Force
                  Add-BitLockerKeyProtector -MountPoint "D:" -PasswordProtector -Password $pass 
                 */
-                textBox_pshellResult.Text = "$pass = ConvertTo-SecureString \"myPASSWORD\" -AsPlainText -Force" + "\r\n";
+                textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
                 textBox_pshellResult.Text += "Add-BitLockerKeyProtector -MountPoint " + "\"" + unit + "\"" +
                 " " + protectorPS + " -Password $pass";
                 textBox_pshellResult.Text += "\r\n\r\n" +
-                    "# Note: USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
+                    "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
                     "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
             }
         }
@@ -203,7 +206,7 @@ namespace BitLocker_Helper
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
             textBox_cmdResult.Text = @"repair-bde " + unit + " X: " + "-Password";
-            textBox_pshellResult.Text = "";
+            textBox_pshellResult.Text = "Not available, for now...";
         }
 
         private void Button_withoutTPMinfo_Click(object sender, EventArgs e)
@@ -215,6 +218,39 @@ namespace BitLocker_Helper
                 form2 = new withoutTPM();
 
             form2.Show();
+        }
+
+        private void Button_ForceSoftwareOnly_Click(object sender, EventArgs e)
+        {
+            if (form3.IsAccessible)
+                return;
+
+            if (form3.IsDisposed)
+                form3 = new ForceSoftwareOnly();
+
+            form3.Show();
+        }
+
+        private void Button_enableAutoUnlock_Click(object sender, EventArgs e)
+        {
+            string unit;
+            try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
+            textBox_cmdResult.Text = "manage-bde –autounlock -enable " + unit;
+            textBox_pshellResult.Text = "Enable-BitLockerAutoUnlock -MountPoint " + unit;
+        }
+
+        private void Button_disableAutoUnlock_Click(object sender, EventArgs e)
+        {
+            string unit;
+            try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
+            textBox_cmdResult.Text = "manage-bde –autounlock -disable " + unit;
+            textBox_pshellResult.Text = "Disable-AutoUnlock -MountPoint " + unit;
+        }
+
+        private void Button_ClearAutoKeys_Click(object sender, EventArgs e)
+        {
+            textBox_cmdResult.Text = "manage-bde -autounlock -clearallkeys";
+            textBox_pshellResult.Text = "Clear-BitLockerAutoUnlock";
         }
     }
 }

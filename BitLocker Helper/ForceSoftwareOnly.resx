@@ -117,23 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textBox_withoutTPM.Text" xml:space="preserve">
-    <value>How to Use BitLocker Without a TPM
+  <data name="textBox_ForceSoftwareOnly.Text" xml:space="preserve">
+    <value>When using BitLocker to encrypt a disk in Windows, 
+if the operating system detects a SSD drive with hardware encryption, 
+it will automatically default to using it.
 
-You can bypass this limitation through a Group Policy change. 
+In order to prevent the use of SSD hardware encryption, 
+disable its use using a Windows Group Policy at 
 
-To open the Local Group Policy Editor, press Windows+R on your keyboard, type “gpedit.msc” into the Run dialog box, and press Enter.
+"Computer Configuration\Administrative Templates\Windows Components\
+BitLocker Drive Encryption\Operating System Drives" 
 
-Navigate to :
-Local Computer Policy &gt; Computer Configuration &gt; Administrative Templates &gt; Windows Components &gt; BitLocker Drive Encryption &gt; Operating System Drives in the left pane.
+"Configure use of hardware-based encryption for operating system drives".
 
-Double-click the “Require additional authentication at startup” option in the right pane.
-Select “Enabled” at the top of the window, and ensure the “Allow BitLocker without a compatible TPM” checkbox is enabled here.
 
-Click “OK” to save your changes. 
-
-You can now close the Group Policy Editor window. 
-Your change takes effect immediately-you don’t even need to reboot.</value>
+This policy is also available for removable and fixed data drives and 
+should be disabled for them as well to enforce software encryption.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

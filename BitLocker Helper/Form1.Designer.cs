@@ -56,6 +56,10 @@
             this.textBox_pshellResult = new System.Windows.Forms.TextBox();
             this.label_path = new System.Windows.Forms.Label();
             this.textBox_path = new System.Windows.Forms.TextBox();
+            this.button_ForceSoftwareOnly = new System.Windows.Forms.Button();
+            this.button_disableAutoUnlock = new System.Windows.Forms.Button();
+            this.button_enableAutoUnlock = new System.Windows.Forms.Button();
+            this.button_ClearAutoKeys = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_unit
@@ -78,7 +82,7 @@
             // 
             // button_status
             // 
-            this.button_status.Location = new System.Drawing.Point(399, 20);
+            this.button_status.Location = new System.Drawing.Point(388, 20);
             this.button_status.Name = "button_status";
             this.button_status.Size = new System.Drawing.Size(113, 23);
             this.button_status.TabIndex = 2;
@@ -98,7 +102,7 @@
             // 
             // button_Lock
             // 
-            this.button_Lock.Location = new System.Drawing.Point(399, 49);
+            this.button_Lock.Location = new System.Drawing.Point(388, 49);
             this.button_Lock.Name = "button_Lock";
             this.button_Lock.Size = new System.Drawing.Size(113, 23);
             this.button_Lock.TabIndex = 4;
@@ -192,7 +196,7 @@
             this.checkBox_usedSpace.AutoSize = true;
             this.checkBox_usedSpace.Checked = true;
             this.checkBox_usedSpace.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_usedSpace.Location = new System.Drawing.Point(399, 94);
+            this.checkBox_usedSpace.Location = new System.Drawing.Point(388, 93);
             this.checkBox_usedSpace.Name = "checkBox_usedSpace";
             this.checkBox_usedSpace.Size = new System.Drawing.Size(119, 19);
             this.checkBox_usedSpace.TabIndex = 15;
@@ -202,7 +206,7 @@
             // 
             // button_repair
             // 
-            this.button_repair.Location = new System.Drawing.Point(399, 185);
+            this.button_repair.Location = new System.Drawing.Point(388, 185);
             this.button_repair.Name = "button_repair";
             this.button_repair.Size = new System.Drawing.Size(207, 23);
             this.button_repair.TabIndex = 23;
@@ -213,7 +217,7 @@
             // 
             // button_withoutTPMinfo
             // 
-            this.button_withoutTPMinfo.Location = new System.Drawing.Point(399, 223);
+            this.button_withoutTPMinfo.Location = new System.Drawing.Point(388, 214);
             this.button_withoutTPMinfo.Name = "button_withoutTPMinfo";
             this.button_withoutTPMinfo.Size = new System.Drawing.Size(207, 23);
             this.button_withoutTPMinfo.TabIndex = 24;
@@ -308,7 +312,7 @@
             // label_path
             // 
             this.label_path.AutoSize = true;
-            this.label_path.Location = new System.Drawing.Point(396, 140);
+            this.label_path.Location = new System.Drawing.Point(385, 140);
             this.label_path.Name = "label_path";
             this.label_path.Size = new System.Drawing.Size(32, 15);
             this.label_path.TabIndex = 21;
@@ -316,18 +320,66 @@
             // 
             // textBox_path
             // 
-            this.textBox_path.Location = new System.Drawing.Point(434, 138);
+            this.textBox_path.Location = new System.Drawing.Point(423, 138);
             this.textBox_path.MaxLength = 256;
             this.textBox_path.Name = "textBox_path";
             this.textBox_path.Size = new System.Drawing.Size(231, 21);
             this.textBox_path.TabIndex = 22;
             this.textBox_path.Text = "D:\\Secret";
             // 
+            // button_ForceSoftwareOnly
+            // 
+            this.button_ForceSoftwareOnly.Location = new System.Drawing.Point(388, 243);
+            this.button_ForceSoftwareOnly.Name = "button_ForceSoftwareOnly";
+            this.button_ForceSoftwareOnly.Size = new System.Drawing.Size(207, 23);
+            this.button_ForceSoftwareOnly.TabIndex = 25;
+            this.button_ForceSoftwareOnly.Text = "Disable Hardware Encryption";
+            this.toolTip1.SetToolTip(this.button_ForceSoftwareOnly, "BitLocker enforced to use software encryption.");
+            this.button_ForceSoftwareOnly.UseVisualStyleBackColor = true;
+            this.button_ForceSoftwareOnly.Click += new System.EventHandler(this.Button_ForceSoftwareOnly_Click);
+            // 
+            // button_disableAutoUnlock
+            // 
+            this.button_disableAutoUnlock.Location = new System.Drawing.Point(527, 21);
+            this.button_disableAutoUnlock.Name = "button_disableAutoUnlock";
+            this.button_disableAutoUnlock.Size = new System.Drawing.Size(127, 23);
+            this.button_disableAutoUnlock.TabIndex = 26;
+            this.button_disableAutoUnlock.Text = "Disable Auto Unlock";
+            this.toolTip1.SetToolTip(this.button_disableAutoUnlock, "Disables automatic unlocking for a BitLocker volume.");
+            this.button_disableAutoUnlock.UseVisualStyleBackColor = true;
+            this.button_disableAutoUnlock.Click += new System.EventHandler(this.Button_disableAutoUnlock_Click);
+            // 
+            // button_enableAutoUnlock
+            // 
+            this.button_enableAutoUnlock.Location = new System.Drawing.Point(527, 49);
+            this.button_enableAutoUnlock.Name = "button_enableAutoUnlock";
+            this.button_enableAutoUnlock.Size = new System.Drawing.Size(127, 23);
+            this.button_enableAutoUnlock.TabIndex = 27;
+            this.button_enableAutoUnlock.Text = "Enable Auto Unlock";
+            this.toolTip1.SetToolTip(this.button_enableAutoUnlock, "Enables automatic unlocking for a BitLocker volume.");
+            this.button_enableAutoUnlock.UseVisualStyleBackColor = true;
+            this.button_enableAutoUnlock.Click += new System.EventHandler(this.Button_enableAutoUnlock_Click);
+            // 
+            // button_ClearAutoKeys
+            // 
+            this.button_ClearAutoKeys.Location = new System.Drawing.Point(527, 78);
+            this.button_ClearAutoKeys.Name = "button_ClearAutoKeys";
+            this.button_ClearAutoKeys.Size = new System.Drawing.Size(127, 23);
+            this.button_ClearAutoKeys.TabIndex = 28;
+            this.button_ClearAutoKeys.Text = "Clear Saved Keys";
+            this.toolTip1.SetToolTip(this.button_ClearAutoKeys, "Removes all automatic unlocking keys.");
+            this.button_ClearAutoKeys.UseVisualStyleBackColor = true;
+            this.button_ClearAutoKeys.Click += new System.EventHandler(this.Button_ClearAutoKeys_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 441);
+            this.Controls.Add(this.button_ClearAutoKeys);
+            this.Controls.Add(this.button_enableAutoUnlock);
+            this.Controls.Add(this.button_disableAutoUnlock);
+            this.Controls.Add(this.button_ForceSoftwareOnly);
             this.Controls.Add(this.button_withoutTPMinfo);
             this.Controls.Add(this.button_repair);
             this.Controls.Add(this.textBox_path);
@@ -394,6 +446,10 @@
         private System.Windows.Forms.TextBox textBox_path;
         private System.Windows.Forms.Button button_repair;
         private System.Windows.Forms.Button button_withoutTPMinfo;
+        private System.Windows.Forms.Button button_ForceSoftwareOnly;
+        private System.Windows.Forms.Button button_disableAutoUnlock;
+        private System.Windows.Forms.Button button_enableAutoUnlock;
+        private System.Windows.Forms.Button button_ClearAutoKeys;
     }
 }
 

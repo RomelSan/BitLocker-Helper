@@ -56,6 +56,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ForceSoftwareOnly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForceSoftwareOnly.Designer.cs">
+      <DependentUpon>ForceSoftwareOnly.cs</DependentUpon>
+    </Compile>
     <Compile Include="withoutTPM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ForceSoftwareOnly.resx">
+      <DependentUpon>ForceSoftwareOnly.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="withoutTPM.resx">
       <DependentUpon>withoutTPM.cs</DependentUpon>
     </EmbeddedResource>
