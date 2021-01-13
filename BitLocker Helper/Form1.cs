@@ -98,17 +98,38 @@ namespace BitLocker_Helper
             textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" + 
                 " -EncryptionMethod " + encryptionPS + " " + protectorPS;
 
+            if (checkBox_usedSpace.Checked)
+            {
+                textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " + protector + " -UsedSpaceOnly";
+                textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" + " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -UsedSpaceOnly";
+            }
+
+
             if (protectorPS == "-RecoveryKeyProtector")
             {
                 string path = "";
                 try { path = textBox_path.Text; } catch { path = @"H:\Data"; }
                 // manage-bde –on D: -EncryptionMethod aes256 -RecoveryKey H:\Data
-                textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " +
-                protector + " " + "\"" + path + "\"";
 
-                // Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes256 -RecoveryKeyProtector -RecoveryKeyPath "E:\Recovery\"
-                textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
-                " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -RecoveryKeyPath " + "\"" + path + "\\\"";
+                if (checkBox_usedSpace.Checked)
+                {
+                    textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " +
+                        protector + " " + "\"" + path + "\"" + " -UsedSpaceOnly";
+
+                    // Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes256 -RecoveryKeyProtector -RecoveryKeyPath "E:\Recovery\"
+                    textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                        " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -RecoveryKeyPath " + "\"" + path + "\\\"" + " -UsedSpaceOnly";
+                }
+
+                else
+                {
+                    textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " +
+                        protector + " " + "\"" + path + "\"";
+
+                    // Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes256 -RecoveryKeyProtector -RecoveryKeyPath "E:\Recovery\"
+                    textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                        " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -RecoveryKeyPath " + "\"" + path + "\\\"";
+                }
             }
 
             if (protectorPS == "-PasswordProtector")
@@ -117,18 +138,26 @@ namespace BitLocker_Helper
                  $pass = ConvertTo-SecureString "myPASSWORD999HERE" -AsPlainText -Force
                  Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes128 -PasswordProtector -Password $pass 
                 */
-                textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
-                textBox_pshellResult.Text += "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
-                " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -Password $pass";
-                textBox_pshellResult.Text += "\r\n\r\n" +
-                                                        "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
-                                                        "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
-            }
+                if (checkBox_usedSpace.Checked)
+                {
+                    textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
+                    textBox_pshellResult.Text += "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                    " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -Password $pass" + " -UsedSpaceOnly";
+                    textBox_pshellResult.Text += "\r\n\r\n" +
+                                                            "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
+                                                            "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+                }
 
-            if (checkBox_usedSpace.Checked)
-            {
-                textBox_cmdResult.Text += @" -UsedSpaceOnly";
-                textBox_pshellResult.Text += @" -UsedSpaceOnly:$true";
+                else
+                {
+                    textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
+                    textBox_pshellResult.Text += "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                    " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -Password $pass";
+                    textBox_pshellResult.Text += "\r\n\r\n" +
+                                                            "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
+                                                            "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+                }
+  
             }
 
         }

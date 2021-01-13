@@ -44,6 +44,10 @@
             this.button_removeProtector = new System.Windows.Forms.Button();
             this.checkBox_usedSpace = new System.Windows.Forms.CheckBox();
             this.button_repair = new System.Windows.Forms.Button();
+            this.button_ForceSoftwareOnly = new System.Windows.Forms.Button();
+            this.button_disableAutoUnlock = new System.Windows.Forms.Button();
+            this.button_enableAutoUnlock = new System.Windows.Forms.Button();
+            this.button_ClearAutoKeys = new System.Windows.Forms.Button();
             this.button_withoutTPMinfo = new System.Windows.Forms.Button();
             this.label_protector = new System.Windows.Forms.Label();
             this.label_encryption = new System.Windows.Forms.Label();
@@ -56,10 +60,6 @@
             this.textBox_pshellResult = new System.Windows.Forms.TextBox();
             this.label_path = new System.Windows.Forms.Label();
             this.textBox_path = new System.Windows.Forms.TextBox();
-            this.button_ForceSoftwareOnly = new System.Windows.Forms.Button();
-            this.button_disableAutoUnlock = new System.Windows.Forms.Button();
-            this.button_enableAutoUnlock = new System.Windows.Forms.Button();
-            this.button_ClearAutoKeys = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_unit
@@ -151,8 +151,8 @@
             this.comboBox_encryption.Size = new System.Drawing.Size(138, 23);
             this.comboBox_encryption.TabIndex = 8;
             this.comboBox_encryption.Text = "Select Encryption";
-            this.toolTip1.SetToolTip(this.comboBox_encryption, "Password: Uses a normal password\r\nRecovery Password: Uses a random 48 digit as un" +
-        "locker\r\nRecovery Key: Uses an external file as unlocker");
+            this.toolTip1.SetToolTip(this.comboBox_encryption, "256 bits should be stronger.\r\n128 bits should be OK but faster.\r\nXTS adds a layer" +
+        " of protection.");
             // 
             // button_encrypt
             // 
@@ -214,6 +214,50 @@
             this.toolTip1.SetToolTip(this.button_repair, "Rapairs damaged BitLocker drive.\r\nReplace X: with a volume letter of a NEW DISK.");
             this.button_repair.UseVisualStyleBackColor = true;
             this.button_repair.Click += new System.EventHandler(this.Button_repair_Click);
+            // 
+            // button_ForceSoftwareOnly
+            // 
+            this.button_ForceSoftwareOnly.Location = new System.Drawing.Point(388, 243);
+            this.button_ForceSoftwareOnly.Name = "button_ForceSoftwareOnly";
+            this.button_ForceSoftwareOnly.Size = new System.Drawing.Size(207, 23);
+            this.button_ForceSoftwareOnly.TabIndex = 25;
+            this.button_ForceSoftwareOnly.Text = "Disable Hardware Encryption";
+            this.toolTip1.SetToolTip(this.button_ForceSoftwareOnly, "BitLocker enforced to use software encryption.");
+            this.button_ForceSoftwareOnly.UseVisualStyleBackColor = true;
+            this.button_ForceSoftwareOnly.Click += new System.EventHandler(this.Button_ForceSoftwareOnly_Click);
+            // 
+            // button_disableAutoUnlock
+            // 
+            this.button_disableAutoUnlock.Location = new System.Drawing.Point(527, 21);
+            this.button_disableAutoUnlock.Name = "button_disableAutoUnlock";
+            this.button_disableAutoUnlock.Size = new System.Drawing.Size(127, 23);
+            this.button_disableAutoUnlock.TabIndex = 26;
+            this.button_disableAutoUnlock.Text = "Disable Auto Unlock";
+            this.toolTip1.SetToolTip(this.button_disableAutoUnlock, "Disables automatic unlocking for a BitLocker volume.");
+            this.button_disableAutoUnlock.UseVisualStyleBackColor = true;
+            this.button_disableAutoUnlock.Click += new System.EventHandler(this.Button_disableAutoUnlock_Click);
+            // 
+            // button_enableAutoUnlock
+            // 
+            this.button_enableAutoUnlock.Location = new System.Drawing.Point(527, 49);
+            this.button_enableAutoUnlock.Name = "button_enableAutoUnlock";
+            this.button_enableAutoUnlock.Size = new System.Drawing.Size(127, 23);
+            this.button_enableAutoUnlock.TabIndex = 27;
+            this.button_enableAutoUnlock.Text = "Enable Auto Unlock";
+            this.toolTip1.SetToolTip(this.button_enableAutoUnlock, "Enables automatic unlocking for a BitLocker volume.");
+            this.button_enableAutoUnlock.UseVisualStyleBackColor = true;
+            this.button_enableAutoUnlock.Click += new System.EventHandler(this.Button_enableAutoUnlock_Click);
+            // 
+            // button_ClearAutoKeys
+            // 
+            this.button_ClearAutoKeys.Location = new System.Drawing.Point(527, 78);
+            this.button_ClearAutoKeys.Name = "button_ClearAutoKeys";
+            this.button_ClearAutoKeys.Size = new System.Drawing.Size(127, 23);
+            this.button_ClearAutoKeys.TabIndex = 28;
+            this.button_ClearAutoKeys.Text = "Clear Saved Keys";
+            this.toolTip1.SetToolTip(this.button_ClearAutoKeys, "Removes all automatic unlocking keys.");
+            this.button_ClearAutoKeys.UseVisualStyleBackColor = true;
+            this.button_ClearAutoKeys.Click += new System.EventHandler(this.Button_ClearAutoKeys_Click);
             // 
             // button_withoutTPMinfo
             // 
@@ -295,7 +339,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_cmdResult.Location = new System.Drawing.Point(12, 295);
             this.textBox_cmdResult.Name = "textBox_cmdResult";
-            this.textBox_cmdResult.Size = new System.Drawing.Size(653, 21);
+            this.textBox_cmdResult.Size = new System.Drawing.Size(680, 21);
             this.textBox_cmdResult.TabIndex = 19;
             // 
             // textBox_pshellResult
@@ -306,7 +350,7 @@
             this.textBox_pshellResult.Multiline = true;
             this.textBox_pshellResult.Name = "textBox_pshellResult";
             this.textBox_pshellResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_pshellResult.Size = new System.Drawing.Size(653, 82);
+            this.textBox_pshellResult.Size = new System.Drawing.Size(680, 82);
             this.textBox_pshellResult.TabIndex = 20;
             // 
             // label_path
@@ -327,55 +371,11 @@
             this.textBox_path.TabIndex = 22;
             this.textBox_path.Text = "D:\\Secret";
             // 
-            // button_ForceSoftwareOnly
-            // 
-            this.button_ForceSoftwareOnly.Location = new System.Drawing.Point(388, 243);
-            this.button_ForceSoftwareOnly.Name = "button_ForceSoftwareOnly";
-            this.button_ForceSoftwareOnly.Size = new System.Drawing.Size(207, 23);
-            this.button_ForceSoftwareOnly.TabIndex = 25;
-            this.button_ForceSoftwareOnly.Text = "Disable Hardware Encryption";
-            this.toolTip1.SetToolTip(this.button_ForceSoftwareOnly, "BitLocker enforced to use software encryption.");
-            this.button_ForceSoftwareOnly.UseVisualStyleBackColor = true;
-            this.button_ForceSoftwareOnly.Click += new System.EventHandler(this.Button_ForceSoftwareOnly_Click);
-            // 
-            // button_disableAutoUnlock
-            // 
-            this.button_disableAutoUnlock.Location = new System.Drawing.Point(527, 21);
-            this.button_disableAutoUnlock.Name = "button_disableAutoUnlock";
-            this.button_disableAutoUnlock.Size = new System.Drawing.Size(127, 23);
-            this.button_disableAutoUnlock.TabIndex = 26;
-            this.button_disableAutoUnlock.Text = "Disable Auto Unlock";
-            this.toolTip1.SetToolTip(this.button_disableAutoUnlock, "Disables automatic unlocking for a BitLocker volume.");
-            this.button_disableAutoUnlock.UseVisualStyleBackColor = true;
-            this.button_disableAutoUnlock.Click += new System.EventHandler(this.Button_disableAutoUnlock_Click);
-            // 
-            // button_enableAutoUnlock
-            // 
-            this.button_enableAutoUnlock.Location = new System.Drawing.Point(527, 49);
-            this.button_enableAutoUnlock.Name = "button_enableAutoUnlock";
-            this.button_enableAutoUnlock.Size = new System.Drawing.Size(127, 23);
-            this.button_enableAutoUnlock.TabIndex = 27;
-            this.button_enableAutoUnlock.Text = "Enable Auto Unlock";
-            this.toolTip1.SetToolTip(this.button_enableAutoUnlock, "Enables automatic unlocking for a BitLocker volume.");
-            this.button_enableAutoUnlock.UseVisualStyleBackColor = true;
-            this.button_enableAutoUnlock.Click += new System.EventHandler(this.Button_enableAutoUnlock_Click);
-            // 
-            // button_ClearAutoKeys
-            // 
-            this.button_ClearAutoKeys.Location = new System.Drawing.Point(527, 78);
-            this.button_ClearAutoKeys.Name = "button_ClearAutoKeys";
-            this.button_ClearAutoKeys.Size = new System.Drawing.Size(127, 23);
-            this.button_ClearAutoKeys.TabIndex = 28;
-            this.button_ClearAutoKeys.Text = "Clear Saved Keys";
-            this.toolTip1.SetToolTip(this.button_ClearAutoKeys, "Removes all automatic unlocking keys.");
-            this.button_ClearAutoKeys.UseVisualStyleBackColor = true;
-            this.button_ClearAutoKeys.Click += new System.EventHandler(this.Button_ClearAutoKeys_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 441);
+            this.ClientSize = new System.Drawing.Size(704, 441);
             this.Controls.Add(this.button_ClearAutoKeys);
             this.Controls.Add(this.button_enableAutoUnlock);
             this.Controls.Add(this.button_disableAutoUnlock);
@@ -408,8 +408,8 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(800, 500);
-            this.MinimumSize = new System.Drawing.Size(693, 480);
+            this.MaximumSize = new System.Drawing.Size(850, 600);
+            this.MinimumSize = new System.Drawing.Size(720, 480);
             this.Name = "Form1";
             this.Text = "Bitlocker Helper";
             this.Load += new System.EventHandler(this.Form1_Load);
