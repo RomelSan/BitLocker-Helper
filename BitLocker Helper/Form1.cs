@@ -65,6 +65,9 @@ namespace BitLocker_Helper
         {
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
+            if (comboBox_encryption.SelectedItem is null) { comboBox_encryption.SelectedItem = "XTS AES 256"; }
+            if (comboBox_Protectors.SelectedItem is null) { comboBox_Protectors.SelectedItem = "Password"; }
+
             string encryption = "";
             string encryptionPS = "";
             string protectorPS = "";
@@ -176,6 +179,7 @@ namespace BitLocker_Helper
         {
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
+            if (comboBox_Protectors.SelectedItem is null) { comboBox_Protectors.SelectedItem = "Password"; }
             string protectorPS = "";
             object selectedProtector = null;
 
@@ -216,6 +220,57 @@ namespace BitLocker_Helper
                 textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
                 textBox_pshellResult.Text += "Add-BitLockerKeyProtector -MountPoint " + "\"" + unit + "\"" +
                 " " + protectorPS + " -Password $pass";
+                textBox_pshellResult.Text += "\r\n\r\n" +
+                    "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
+                    "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+            }
+        }
+
+        private void button_unlockProtector_Click(object sender, EventArgs e)
+        {
+            string unit;
+            try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
+            if (comboBox_Protectors.SelectedItem is null) { comboBox_Protectors.SelectedItem = "Password"; }
+            string protectorPS = "";
+            object selectedProtector = null;
+
+            string protector = "";
+            try
+            {
+                selectedProtector = comboBox_Protectors.SelectedItem;
+                if (selectedProtector.ToString() == "Password") { protector = "-Password"; protectorPS = "-Password"; }
+                if (selectedProtector.ToString() == "Recovery Password") { protector = "-RecoveryPassword"; protectorPS = "-RecoveryPassword"; }
+                if (selectedProtector.ToString() == "Recovery Key") { protector = "-RecoveryKey"; protectorPS = "-RecoveryKeyPath"; }
+            }
+            catch { protector = "-recoverypassword"; protectorPS = "-RecoveryPassword"; }
+
+            // manage-bde -unlock D: -RecoveryPassword
+            textBox_cmdResult.Text = "manage-bde -unlock " + unit + " " + protector;
+
+            // Unlock-BitLocker -MountPoint "S:" -RecoveryPassword <RecoveryPassword Here>
+            textBox_pshellResult.Text = "Unlock-BitLocker -MountPoint " + unit + " " + protectorPS + " " + "<RecoveryPassword Here>";
+
+            if (protectorPS == "-RecoveryKeyPath")
+            {
+                string path = "";
+                try { path = textBox_path.Text; } catch { path = @"H:\Data"; }
+                // manage-bde -unlock e: -RecoveryKey "f:\File Folder\Filename"
+                textBox_cmdResult.Text = "manage-bde -unlock " + unit + " " + protector + " " + "\"" + path + "\"";
+
+                // Unlock-BitLocker -MountPoint "S:" -RecoveryKeyPath "D:\key\43A6D103-9484-4A76-8015-423C4667AC66.BEK"
+                textBox_pshellResult.Text = "Unlock-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                " " + protectorPS + " " + "\"" + path + "\\\"";
+            }
+
+            if (protectorPS == "-Password")
+            {
+                /*
+                 $pass = ConvertTo-SecureString "myPASSWORD999HERE" -AsPlainText -Force
+                 Unlock-BitLocker -MountPoint "S:" -Password $pass
+                */
+                textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
+                textBox_pshellResult.Text += "Unlock-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                " " + protectorPS + " $pass";
                 textBox_pshellResult.Text += "\r\n\r\n" +
                     "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
                     "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
@@ -280,6 +335,11 @@ namespace BitLocker_Helper
         {
             textBox_cmdResult.Text = "manage-bde -autounlock -clearallkeys";
             textBox_pshellResult.Text = "Clear-BitLockerAutoUnlock";
+        }
+
+        private void label_author_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/RomelSan/BitLocker-Helper");
         }
     }
 }

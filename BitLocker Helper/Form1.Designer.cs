@@ -60,12 +60,14 @@
             this.textBox_pshellResult = new System.Windows.Forms.TextBox();
             this.label_path = new System.Windows.Forms.Label();
             this.textBox_path = new System.Windows.Forms.TextBox();
+            this.button_unlockProtector = new System.Windows.Forms.Button();
+            this.label_author = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_unit
             // 
             this.label_unit.AutoSize = true;
-            this.label_unit.Location = new System.Drawing.Point(51, 24);
+            this.label_unit.Location = new System.Drawing.Point(51, 29);
             this.label_unit.Name = "label_unit";
             this.label_unit.Size = new System.Drawing.Size(29, 15);
             this.label_unit.TabIndex = 0;
@@ -73,7 +75,7 @@
             // 
             // textBox_Unit
             // 
-            this.textBox_Unit.Location = new System.Drawing.Point(86, 21);
+            this.textBox_Unit.Location = new System.Drawing.Point(86, 26);
             this.textBox_Unit.MaxLength = 256;
             this.textBox_Unit.Name = "textBox_Unit";
             this.textBox_Unit.Size = new System.Drawing.Size(138, 21);
@@ -82,7 +84,7 @@
             // 
             // button_status
             // 
-            this.button_status.Location = new System.Drawing.Point(388, 20);
+            this.button_status.Location = new System.Drawing.Point(388, 25);
             this.button_status.Name = "button_status";
             this.button_status.Size = new System.Drawing.Size(113, 23);
             this.button_status.TabIndex = 2;
@@ -92,7 +94,7 @@
             // 
             // button_statusUnit
             // 
-            this.button_statusUnit.Location = new System.Drawing.Point(242, 20);
+            this.button_statusUnit.Location = new System.Drawing.Point(242, 25);
             this.button_statusUnit.Name = "button_statusUnit";
             this.button_statusUnit.Size = new System.Drawing.Size(113, 23);
             this.button_statusUnit.TabIndex = 3;
@@ -102,7 +104,7 @@
             // 
             // button_Lock
             // 
-            this.button_Lock.Location = new System.Drawing.Point(388, 49);
+            this.button_Lock.Location = new System.Drawing.Point(388, 54);
             this.button_Lock.Name = "button_Lock";
             this.button_Lock.Size = new System.Drawing.Size(113, 23);
             this.button_Lock.TabIndex = 4;
@@ -115,7 +117,7 @@
             // button_turnOff
             // 
             this.button_turnOff.ForeColor = System.Drawing.Color.Red;
-            this.button_turnOff.Location = new System.Drawing.Point(86, 223);
+            this.button_turnOff.Location = new System.Drawing.Point(86, 243);
             this.button_turnOff.Name = "button_turnOff";
             this.button_turnOff.Size = new System.Drawing.Size(138, 23);
             this.button_turnOff.TabIndex = 5;
@@ -181,7 +183,7 @@
             // 
             // button_removeProtector
             // 
-            this.button_removeProtector.Location = new System.Drawing.Point(242, 185);
+            this.button_removeProtector.Location = new System.Drawing.Point(242, 213);
             this.button_removeProtector.Name = "button_removeProtector";
             this.button_removeProtector.Size = new System.Drawing.Size(113, 23);
             this.button_removeProtector.TabIndex = 12;
@@ -228,7 +230,7 @@
             // 
             // button_disableAutoUnlock
             // 
-            this.button_disableAutoUnlock.Location = new System.Drawing.Point(527, 21);
+            this.button_disableAutoUnlock.Location = new System.Drawing.Point(527, 26);
             this.button_disableAutoUnlock.Name = "button_disableAutoUnlock";
             this.button_disableAutoUnlock.Size = new System.Drawing.Size(127, 23);
             this.button_disableAutoUnlock.TabIndex = 26;
@@ -239,7 +241,7 @@
             // 
             // button_enableAutoUnlock
             // 
-            this.button_enableAutoUnlock.Location = new System.Drawing.Point(527, 49);
+            this.button_enableAutoUnlock.Location = new System.Drawing.Point(527, 54);
             this.button_enableAutoUnlock.Name = "button_enableAutoUnlock";
             this.button_enableAutoUnlock.Size = new System.Drawing.Size(127, 23);
             this.button_enableAutoUnlock.TabIndex = 27;
@@ -250,7 +252,7 @@
             // 
             // button_ClearAutoKeys
             // 
-            this.button_ClearAutoKeys.Location = new System.Drawing.Point(527, 78);
+            this.button_ClearAutoKeys.Location = new System.Drawing.Point(527, 83);
             this.button_ClearAutoKeys.Name = "button_ClearAutoKeys";
             this.button_ClearAutoKeys.Size = new System.Drawing.Size(127, 23);
             this.button_ClearAutoKeys.TabIndex = 28;
@@ -272,7 +274,7 @@
             // label_protector
             // 
             this.label_protector.AutoSize = true;
-            this.label_protector.Location = new System.Drawing.Point(24, 140);
+            this.label_protector.Location = new System.Drawing.Point(24, 141);
             this.label_protector.Name = "label_protector";
             this.label_protector.Size = new System.Drawing.Size(56, 15);
             this.label_protector.TabIndex = 7;
@@ -289,7 +291,7 @@
             // 
             // textBox_protectorID
             // 
-            this.textBox_protectorID.Location = new System.Drawing.Point(86, 186);
+            this.textBox_protectorID.Location = new System.Drawing.Point(86, 214);
             this.textBox_protectorID.MaxLength = 256;
             this.textBox_protectorID.Name = "textBox_protectorID";
             this.textBox_protectorID.Size = new System.Drawing.Size(138, 21);
@@ -299,7 +301,7 @@
             // label_protectorID
             // 
             this.label_protectorID.AutoSize = true;
-            this.label_protectorID.Location = new System.Drawing.Point(9, 188);
+            this.label_protectorID.Location = new System.Drawing.Point(9, 216);
             this.label_protectorID.Name = "label_protectorID";
             this.label_protectorID.Size = new System.Drawing.Size(71, 15);
             this.label_protectorID.TabIndex = 13;
@@ -307,7 +309,7 @@
             // 
             // button_getProtectors
             // 
-            this.button_getProtectors.Location = new System.Drawing.Point(242, 49);
+            this.button_getProtectors.Location = new System.Drawing.Point(242, 54);
             this.button_getProtectors.Name = "button_getProtectors";
             this.button_getProtectors.Size = new System.Drawing.Size(113, 23);
             this.button_getProtectors.TabIndex = 16;
@@ -371,11 +373,35 @@
             this.textBox_path.TabIndex = 22;
             this.textBox_path.Text = "D:\\Secret";
             // 
+            // button_unlockProtector
+            // 
+            this.button_unlockProtector.Location = new System.Drawing.Point(242, 166);
+            this.button_unlockProtector.Name = "button_unlockProtector";
+            this.button_unlockProtector.Size = new System.Drawing.Size(113, 42);
+            this.button_unlockProtector.TabIndex = 29;
+            this.button_unlockProtector.Text = "Unlock with Protector";
+            this.toolTip1.SetToolTip(this.button_unlockProtector, "Unlock the Drive using a Protector");
+            this.button_unlockProtector.UseVisualStyleBackColor = true;
+            this.button_unlockProtector.Click += new System.EventHandler(this.button_unlockProtector_Click);
+            // 
+            // label_author
+            // 
+            this.label_author.AutoSize = true;
+            this.label_author.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label_author.Location = new System.Drawing.Point(9, 9);
+            this.label_author.Name = "label_author";
+            this.label_author.Size = new System.Drawing.Size(51, 15);
+            this.label_author.TabIndex = 30;
+            this.label_author.Text = "Website";
+            this.label_author.Click += new System.EventHandler(this.label_author_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 441);
+            this.Controls.Add(this.label_author);
+            this.Controls.Add(this.button_unlockProtector);
             this.Controls.Add(this.button_ClearAutoKeys);
             this.Controls.Add(this.button_enableAutoUnlock);
             this.Controls.Add(this.button_disableAutoUnlock);
@@ -411,7 +437,7 @@
             this.MaximumSize = new System.Drawing.Size(850, 600);
             this.MinimumSize = new System.Drawing.Size(720, 480);
             this.Name = "Form1";
-            this.Text = "Bitlocker Helper";
+            this.Text = "Bitlocker Helper 1.0.7";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -450,6 +476,8 @@
         private System.Windows.Forms.Button button_disableAutoUnlock;
         private System.Windows.Forms.Button button_enableAutoUnlock;
         private System.Windows.Forms.Button button_ClearAutoKeys;
+        private System.Windows.Forms.Button button_unlockProtector;
+        private System.Windows.Forms.Label label_author;
     }
 }
 
