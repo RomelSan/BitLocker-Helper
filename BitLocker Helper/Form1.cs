@@ -41,7 +41,7 @@ namespace BitLocker_Helper
         {
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
-            textBox_cmdResult.Text = "manage-bde –status " + unit;
+            textBox_cmdResult.Text = "manage-bde -status " + unit;
             textBox_pshellResult.Text = "Get-BitLockerVolume -MountPoint " + unit;
         }
 
@@ -57,7 +57,7 @@ namespace BitLocker_Helper
         {
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
-            textBox_cmdResult.Text = "manage-bde –lock " + unit;
+            textBox_cmdResult.Text = "manage-bde -lock " + unit;
             textBox_pshellResult.Text = "Lock-BitLocker -MountPoint " + unit;
         }
 
@@ -93,8 +93,8 @@ namespace BitLocker_Helper
             }
             catch { protector = "-recoverypassword"; protectorPS = "-RecoveryPasswordProtector"; }
 
-            // manage-bde –on D: -EncryptionMethod aes256 -recoverypassword 
-            textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " +
+            // manage-bde -on D: -EncryptionMethod aes256 -recoverypassword 
+            textBox_cmdResult.Text = "manage-bde -on " + unit + " " + "-EncryptionMethod " + encryption + " " +
                 protector;
                 
             // Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes256 -RecoveryPasswordProtector -UsedSpaceOnly:$true
@@ -103,7 +103,7 @@ namespace BitLocker_Helper
 
             if (checkBox_usedSpace.Checked)
             {
-                textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " + protector + " -UsedSpaceOnly";
+                textBox_cmdResult.Text = "manage-bde -on " + unit + " " + "-EncryptionMethod " + encryption + " " + protector + " -UsedSpaceOnly";
                 textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" + " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -UsedSpaceOnly";
             }
 
@@ -112,11 +112,11 @@ namespace BitLocker_Helper
             {
                 string path = "";
                 try { path = textBox_path.Text; } catch { path = @"H:\Data"; }
-                // manage-bde –on D: -EncryptionMethod aes256 -RecoveryKey H:\Data
+                // manage-bde -on D: -EncryptionMethod aes256 -RecoveryKey H:\Data
 
                 if (checkBox_usedSpace.Checked)
                 {
-                    textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " +
+                    textBox_cmdResult.Text = "manage-bde -on " + unit + " " + "-EncryptionMethod " + encryption + " " +
                         protector + " " + "\"" + path + "\"" + " -UsedSpaceOnly";
 
                     // Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes256 -RecoveryKeyProtector -RecoveryKeyPath "E:\Recovery\"
@@ -126,7 +126,7 @@ namespace BitLocker_Helper
 
                 else
                 {
-                    textBox_cmdResult.Text = "manage-bde –on " + unit + " " + "-EncryptionMethod " + encryption + " " +
+                    textBox_cmdResult.Text = "manage-bde -on " + unit + " " + "-EncryptionMethod " + encryption + " " +
                         protector + " " + "\"" + path + "\"";
 
                     // Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes256 -RecoveryKeyProtector -RecoveryKeyPath "E:\Recovery\"
@@ -135,33 +135,29 @@ namespace BitLocker_Helper
                 }
             }
 
+            
             if (protectorPS == "-PasswordProtector")
             {
                 /*
                  $pass = ConvertTo-SecureString "myPASSWORD999HERE" -AsPlainText -Force
+                 $pass = Get-Credential -UserName BitLocker -Message "Enter Password"
+                 $pass.GetNetworkCredential().Password
                  Enable-BitLocker -MountPoint "D:" -EncryptionMethod Aes128 -PasswordProtector -Password $pass 
                 */
                 if (checkBox_usedSpace.Checked)
                 {
-                    textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
-                    textBox_pshellResult.Text += "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
-                    " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -Password $pass" + " -UsedSpaceOnly";
-                    textBox_pshellResult.Text += "\r\n\r\n" +
-                                                            "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
-                                                            "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+                    textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                    " -EncryptionMethod " + encryptionPS + " " + protectorPS + "" + " -UsedSpaceOnly";
                 }
 
                 else
                 {
-                    textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
-                    textBox_pshellResult.Text += "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
-                    " -EncryptionMethod " + encryptionPS + " " + protectorPS + " -Password $pass";
-                    textBox_pshellResult.Text += "\r\n\r\n" +
-                                                            "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
-                                                            "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+                    textBox_pshellResult.Text = "Enable-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                    " -EncryptionMethod " + encryptionPS + " " + protectorPS + "";
                 }
   
             }
+            
 
         }
 
@@ -217,12 +213,8 @@ namespace BitLocker_Helper
                  $pass = ConvertTo-SecureString "myPASSWORD999HERE" -AsPlainText -Force
                  Add-BitLockerKeyProtector -MountPoint "D:" -PasswordProtector -Password $pass 
                 */
-                textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
-                textBox_pshellResult.Text += "Add-BitLockerKeyProtector -MountPoint " + "\"" + unit + "\"" +
-                " " + protectorPS + " -Password $pass";
-                textBox_pshellResult.Text += "\r\n\r\n" +
-                    "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
-                    "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+                textBox_pshellResult.Text = "Add-BitLockerKeyProtector -MountPoint " + "\"" + unit + "\"" +
+                " " + protectorPS + "";
             }
         }
 
@@ -268,12 +260,8 @@ namespace BitLocker_Helper
                  $pass = ConvertTo-SecureString "myPASSWORD999HERE" -AsPlainText -Force
                  Unlock-BitLocker -MountPoint "S:" -Password $pass
                 */
-                textBox_pshellResult.Text = "$pass = Read-Host \"Password\" -AsSecureString" + "\r\n";
-                textBox_pshellResult.Text += "Unlock-BitLocker -MountPoint " + "\"" + unit + "\"" +
-                " " + protectorPS + " $pass";
-                textBox_pshellResult.Text += "\r\n\r\n" +
-                    "# Note: Other usage.- USE ` to escape special characters like $, for example: secret$123" + "\r\n" +
-                    "# $pass = ConvertTo-SecureString \"secret`$123\" -AsPlainText -Force";
+                textBox_pshellResult.Text = "Unlock-BitLocker -MountPoint " + "\"" + unit + "\"" +
+                " " + protectorPS;
             }
         }
 
@@ -281,7 +269,7 @@ namespace BitLocker_Helper
         {
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
-            textBox_cmdResult.Text = @"manage-bde –off " + unit;
+            textBox_cmdResult.Text = @"manage-bde -off " + unit;
             textBox_pshellResult.Text = @"Disable-Bitlocker -MountPoint " + unit;
         }
 
@@ -319,7 +307,7 @@ namespace BitLocker_Helper
         {
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
-            textBox_cmdResult.Text = "manage-bde –autounlock -enable " + unit;
+            textBox_cmdResult.Text = "manage-bde -autounlock -enable " + unit;
             textBox_pshellResult.Text = "Enable-BitLockerAutoUnlock -MountPoint " + unit;
         }
 
@@ -327,7 +315,7 @@ namespace BitLocker_Helper
         {
             string unit;
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
-            textBox_cmdResult.Text = "manage-bde –autounlock -disable " + unit;
+            textBox_cmdResult.Text = "manage-bde -autounlock -disable " + unit;
             textBox_pshellResult.Text = "Disable-AutoUnlock -MountPoint " + unit;
         }
 

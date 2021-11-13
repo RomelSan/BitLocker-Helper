@@ -48,6 +48,7 @@
             this.button_disableAutoUnlock = new System.Windows.Forms.Button();
             this.button_enableAutoUnlock = new System.Windows.Forms.Button();
             this.button_ClearAutoKeys = new System.Windows.Forms.Button();
+            this.button_unlockProtector = new System.Windows.Forms.Button();
             this.button_withoutTPMinfo = new System.Windows.Forms.Button();
             this.label_protector = new System.Windows.Forms.Label();
             this.label_encryption = new System.Windows.Forms.Label();
@@ -60,7 +61,6 @@
             this.textBox_pshellResult = new System.Windows.Forms.TextBox();
             this.label_path = new System.Windows.Forms.Label();
             this.textBox_path = new System.Windows.Forms.TextBox();
-            this.button_unlockProtector = new System.Windows.Forms.Button();
             this.label_author = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -261,6 +261,17 @@
             this.button_ClearAutoKeys.UseVisualStyleBackColor = true;
             this.button_ClearAutoKeys.Click += new System.EventHandler(this.Button_ClearAutoKeys_Click);
             // 
+            // button_unlockProtector
+            // 
+            this.button_unlockProtector.Location = new System.Drawing.Point(242, 166);
+            this.button_unlockProtector.Name = "button_unlockProtector";
+            this.button_unlockProtector.Size = new System.Drawing.Size(113, 42);
+            this.button_unlockProtector.TabIndex = 29;
+            this.button_unlockProtector.Text = "Unlock with Protector";
+            this.toolTip1.SetToolTip(this.button_unlockProtector, "Unlock the Drive using a Protector");
+            this.button_unlockProtector.UseVisualStyleBackColor = true;
+            this.button_unlockProtector.Click += new System.EventHandler(this.button_unlockProtector_Click);
+            // 
             // button_withoutTPMinfo
             // 
             this.button_withoutTPMinfo.Location = new System.Drawing.Point(388, 214);
@@ -346,7 +357,8 @@
             // 
             // textBox_pshellResult
             // 
-            this.textBox_pshellResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBox_pshellResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_pshellResult.Location = new System.Drawing.Point(12, 347);
             this.textBox_pshellResult.Multiline = true;
@@ -372,17 +384,6 @@
             this.textBox_path.Size = new System.Drawing.Size(231, 21);
             this.textBox_path.TabIndex = 22;
             this.textBox_path.Text = "D:\\Secret";
-            // 
-            // button_unlockProtector
-            // 
-            this.button_unlockProtector.Location = new System.Drawing.Point(242, 166);
-            this.button_unlockProtector.Name = "button_unlockProtector";
-            this.button_unlockProtector.Size = new System.Drawing.Size(113, 42);
-            this.button_unlockProtector.TabIndex = 29;
-            this.button_unlockProtector.Text = "Unlock with Protector";
-            this.toolTip1.SetToolTip(this.button_unlockProtector, "Unlock the Drive using a Protector");
-            this.button_unlockProtector.UseVisualStyleBackColor = true;
-            this.button_unlockProtector.Click += new System.EventHandler(this.button_unlockProtector_Click);
             // 
             // label_author
             // 
@@ -434,10 +435,10 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(850, 600);
+            this.MaximumSize = new System.Drawing.Size(850, 550);
             this.MinimumSize = new System.Drawing.Size(720, 480);
             this.Name = "Form1";
-            this.Text = "Bitlocker Helper 1.0.7";
+            this.Text = "Bitlocker Helper 1.0.8";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
