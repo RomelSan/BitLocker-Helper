@@ -49,6 +49,7 @@
             this.button_enableAutoUnlock = new System.Windows.Forms.Button();
             this.button_ClearAutoKeys = new System.Windows.Forms.Button();
             this.button_unlockProtector = new System.Windows.Forms.Button();
+            this.button_changePin = new System.Windows.Forms.Button();
             this.button_withoutTPMinfo = new System.Windows.Forms.Button();
             this.label_protector = new System.Windows.Forms.Label();
             this.label_encryption = new System.Windows.Forms.Label();
@@ -131,14 +132,16 @@
             this.comboBox_Protectors.Items.AddRange(new object[] {
             "Password",
             "Recovery Password",
-            "Recovery Key"});
+            "Recovery Key",
+            "TPM and Pin"});
             this.comboBox_Protectors.Location = new System.Drawing.Point(86, 137);
             this.comboBox_Protectors.Name = "comboBox_Protectors";
             this.comboBox_Protectors.Size = new System.Drawing.Size(138, 23);
             this.comboBox_Protectors.TabIndex = 6;
             this.comboBox_Protectors.Text = "Select Protector";
             this.toolTip1.SetToolTip(this.comboBox_Protectors, "Password: Uses a normal password\r\nRecovery Password: Uses a random 48 digit as un" +
-        "locker\r\nRecovery Key: Uses an external file as unlocker");
+        "locker\r\nRecovery Key: Uses an external file as unlocker\r\nTPM and Pin: Uses the T" +
+        "PM with a Pin code");
             // 
             // comboBox_encryption
             // 
@@ -272,13 +275,24 @@
             this.button_unlockProtector.UseVisualStyleBackColor = true;
             this.button_unlockProtector.Click += new System.EventHandler(this.button_unlockProtector_Click);
             // 
+            // button_changePin
+            // 
+            this.button_changePin.Location = new System.Drawing.Point(242, 242);
+            this.button_changePin.Name = "button_changePin";
+            this.button_changePin.Size = new System.Drawing.Size(113, 23);
+            this.button_changePin.TabIndex = 31;
+            this.button_changePin.Text = "Change Pin";
+            this.toolTip1.SetToolTip(this.button_changePin, "Change Pin for TPM and Pin");
+            this.button_changePin.UseVisualStyleBackColor = true;
+            this.button_changePin.Click += new System.EventHandler(this.button_changePin_Click);
+            // 
             // button_withoutTPMinfo
             // 
             this.button_withoutTPMinfo.Location = new System.Drawing.Point(388, 214);
             this.button_withoutTPMinfo.Name = "button_withoutTPMinfo";
             this.button_withoutTPMinfo.Size = new System.Drawing.Size(207, 23);
             this.button_withoutTPMinfo.TabIndex = 24;
-            this.button_withoutTPMinfo.Text = "How to use BitLocker without TPM";
+            this.button_withoutTPMinfo.Text = "TPM Adjustments";
             this.button_withoutTPMinfo.UseVisualStyleBackColor = true;
             this.button_withoutTPMinfo.Click += new System.EventHandler(this.Button_withoutTPMinfo_Click);
             // 
@@ -401,6 +415,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 441);
+            this.Controls.Add(this.button_changePin);
             this.Controls.Add(this.label_author);
             this.Controls.Add(this.button_unlockProtector);
             this.Controls.Add(this.button_ClearAutoKeys);
@@ -438,7 +453,7 @@
             this.MaximumSize = new System.Drawing.Size(850, 550);
             this.MinimumSize = new System.Drawing.Size(720, 480);
             this.Name = "Form1";
-            this.Text = "Bitlocker Helper 1.0.8";
+            this.Text = "Bitlocker Helper 1.0.9";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -479,6 +494,7 @@
         private System.Windows.Forms.Button button_ClearAutoKeys;
         private System.Windows.Forms.Button button_unlockProtector;
         private System.Windows.Forms.Label label_author;
+        private System.Windows.Forms.Button button_changePin;
     }
 }
 

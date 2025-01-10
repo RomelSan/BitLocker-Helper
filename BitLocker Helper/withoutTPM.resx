@@ -118,19 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="textBox_withoutTPM.Text" xml:space="preserve">
-    <value>How to Use BitLocker Without a TPM
+    <value>Allow to use BitLocker without TPM and Allow TPM with Pin
 
-You can bypass this limitation through a Group Policy change. 
-
-To open the Local Group Policy Editor, press Windows+R on your keyboard, type “gpedit.msc” into the Run dialog box, and press Enter.
+Open the Local Group Policy Editor, press Windows+R on your keyboard, type “gpedit.msc” into the Run dialog box, and press Enter.
 
 Navigate to :
 Local Computer Policy &gt; Computer Configuration &gt; Administrative Templates &gt; Windows Components &gt; BitLocker Drive Encryption &gt; Operating System Drives in the left pane.
 
 Double-click the “Require additional authentication at startup” option in the right pane.
-Select “Enabled” at the top of the window, and ensure the “Allow BitLocker without a compatible TPM” checkbox is enabled here.
+Select “Enabled” at the top of the window
+Ensure the “Allow BitLocker without a compatible TPM” checkbox is enabled here.
+Configure TPM startup is set to "Do not allow TPM"
+Configure TPM startup PIN is set to "Allow startup PIN with TPM"
 
-Click “OK” to save your changes. 
+Click “OK” to save your changes.
+
+Double-click the “Allow enhanced PINs for startup"
+Select “Enabled” at the top of the window
+
+Click “OK” to save your changes.
 
 You can now close the Group Policy Editor window. 
 Your change takes effect immediately-you don’t even need to reboot.</value>

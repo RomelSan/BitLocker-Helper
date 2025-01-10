@@ -6,7 +6,7 @@ This tool constructs bitlocker command lines to use in cmd or powershell
 Just run the app.
 
 ### Built on:
-- Visual Studio 2017. Latest version on Visual Studio 2019
+- Visual Studio 2017. Latest version on Visual Studio 2022
 
 ### Requires:
 - Windows 10 Pro / Windows 11 Pro

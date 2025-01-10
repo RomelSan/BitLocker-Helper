@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BitLocker_Helper
+
+// Get-Command -Module BitLocker
 {
     public partial class Form1 : Form
     {
@@ -90,6 +92,9 @@ namespace BitLocker_Helper
                 if (selectedProtector.ToString() == "Password") { protector = "-password"; protectorPS = "-PasswordProtector"; }
                 if (selectedProtector.ToString() == "Recovery Password") { protector = "-recoverypassword"; protectorPS = "-RecoveryPasswordProtector"; }
                 if (selectedProtector.ToString() == "Recovery Key") { protector = "-recoverykey"; protectorPS = "-RecoveryKeyProtector"; }
+                if (selectedProtector.ToString() == "TPM and Pin") { protector = "-TPMAndPIN"; protectorPS = "-TpmAndPinProtector"; }
+                // $Pin = ConvertTo-SecureString "YourPINHere" -AsPlainText -Force
+                // Enable-BitLocker -MountPoint "C:" -EncryptionMethod Aes256 -Pin $Pin -TPMandPinProtector -UsedSpaceOnly
             }
             catch { protector = "-recoverypassword"; protectorPS = "-RecoveryPasswordProtector"; }
 
@@ -168,7 +173,15 @@ namespace BitLocker_Helper
             try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
             try { protectorID = textBox_protectorID.Text; } catch { protectorID = @"{Protector ID HERE}"; }
             textBox_cmdResult.Text = @"manage-bde -protectors -delete " + unit + " -id " + protectorID;
-            textBox_pshellResult.Text = @"Remove-BitLockerKeyProtector -MountPoint " + unit + " -KeyProtectorId " + protectorID;
+            textBox_pshellResult.Text = @"Remove-BitLockerKeyProtector -MountPoint " + unit + " -KeyProtectorId " + "\"" + protectorID + "\"" ;
+        }
+
+        private void button_changePin_Click(object sender, EventArgs e)
+        {
+            string unit;
+            try { unit = textBox_Unit.Text; } catch { unit = "C:"; }
+            textBox_cmdResult.Text = @"manage-bde -changepin " + unit;
+            textBox_pshellResult.Text = "Not available, for now...";
         }
 
         private void Button_addProtector_Click(object sender, EventArgs e)
@@ -186,6 +199,9 @@ namespace BitLocker_Helper
                 if (selectedProtector.ToString() == "Password") { protector = "-password"; protectorPS = "-PasswordProtector"; }
                 if (selectedProtector.ToString() == "Recovery Password") { protector = "-recoverypassword"; protectorPS = "-RecoveryPasswordProtector"; }
                 if (selectedProtector.ToString() == "Recovery Key") { protector = "-recoverykey"; protectorPS = "-RecoveryKeyProtector"; }
+                if (selectedProtector.ToString() == "TPM and Pin") { protector = "-TPMAndPIN"; protectorPS = "-TpmAndPinProtector"; }
+
+                //Add-BitLockerKeyProtector -MountPoint C: -TpmAndPinProtector
             }
             catch { protector = "-recoverypassword"; protectorPS = "-RecoveryPasswordProtector"; }
 
@@ -263,6 +279,12 @@ namespace BitLocker_Helper
                 textBox_pshellResult.Text = "Unlock-BitLocker -MountPoint " + "\"" + unit + "\"" +
                 " " + protectorPS;
             }
+
+            if (selectedProtector.ToString() == "TPM and Pin") 
+            {
+                textBox_cmdResult.Text = "Not available, for now...";
+                textBox_pshellResult.Text = "Not available, for now...";
+            }
         }
 
         private void Button_turnOff_Click(object sender, EventArgs e)
@@ -329,5 +351,7 @@ namespace BitLocker_Helper
         {
             System.Diagnostics.Process.Start("https://github.com/RomelSan/BitLocker-Helper");
         }
+
+
     }
 }
